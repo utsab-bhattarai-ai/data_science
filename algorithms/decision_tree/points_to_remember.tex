@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{\textbf{Essential Notes for Decision Tree Modeling}}
+\author{Utsab}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Data Preparation}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Handle Categorical Variables:} Use one-hot encoding (e.g., \texttt{pd.get\_dummies}) to avoid implying any order where none exists.
+    \item \textbf{No Scaling/Normalization Needed:} Decision Trees split based on thresholds, so feature scaling is irrelevant.
+    \item \textbf{Missing Values:} Scikit-learn's DecisionTree does not handle missing values directly. Impute using \texttt{SimpleImputer}.
+    \item \textbf{Feature Types:} Trees can handle both numerical and categorical (encoded) features.
+\end{itemize}
+
+\section*{2. Key Hyperparameters}
+\begin{itemize}[leftmargin=1.5em]
+    \item \texttt{max\_depth}: Maximum depth of the tree (controls complexity).
+    \item \texttt{min\_samples\_split}: Minimum samples required to split a node.
+    \item \texttt{min\_samples\_leaf}: Minimum samples at a leaf node.
+    \item \texttt{criterion}: \texttt{"gini"} (default, faster) or \texttt{"entropy"} (information gain-based).
+    \item \texttt{max\_features}: Number of features to consider when splitting.
+\end{itemize}
+
+\textbf{Rule:} If we do not limit depth or splits, the tree will overfit.
+
+\section*{3. Avoiding Overfitting}
+\begin{itemize}[leftmargin=1.5em]
+    \item Trees tend to memorize training data.
+    \item Prune the tree by limiting depth or minimum samples.
+    \item Check train vs test accuracy gap: a large gap indicates overfitting.
+    \item Use cross-validation (\texttt{cross\_val\_score}) to validate performance.
+\end{itemize}
+
+\section*{4. Model Evaluation}
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Classification:} Accuracy, Precision, Recall, F1-score, Confusion matrix.
+    \item \textbf{Regression:} RMSE, MAE, $R^2$ score.
+    \item Run with different \texttt{random\_state} values to check stability.
+\end{itemize}
+
+\section*{5. Interpretability}
+\begin{itemize}[leftmargin=1.5em]
+    \item Feature Importance: \texttt{model.feature\_importances\_} shows key drivers.
+    \item Visualization: Use \texttt{plot\_tree} or Graphviz for debugging and explaining results.
+    \item Keep trees shallow for human interpretability.
+\end{itemize}
+
+\section*{6. Computational Considerations}
+\begin{itemize}[leftmargin=1.5em]
+    \item Decision Trees are fast to train, but large datasets with many features can lead to deep trees and high memory use.
+    \item For high-dimensional data, consider Random Forest or Gradient Boosting for better generalization.
+\end{itemize}
+
+\section*{7. When to Use Decision Trees}
+\textbf{Good for:}
+\begin{itemize}[leftmargin=1.5em]
+    \item Interpretable models.
+    \item Mixed categorical and numerical features.
+    \item Non-linear decision boundaries.
+\end{itemize}
+
+\textbf{Avoid when:}
+\begin{itemize}[leftmargin=1.5em]
+    \item Dataset is extremely small (prone to overfitting).
+    \item We need smooth, continuous decision boundaries (trees are axis-aligned).
+\end{itemize}
+
+\end{document}
