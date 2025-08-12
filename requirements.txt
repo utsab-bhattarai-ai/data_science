@@ -1,5 +1,11 @@
-numpy
-pandas
-seaborn
-scikit-learn
-matplotlib
+# Use >= to get latest features and fixes.
+# Use < to avoid unexpected breaking changes in major updates.
+# If we want the exact version, we can specify it like numpy==1.21.0, just remove the < constraints.
+
+numpy>=1.25.0,<2.0.0
+pandas>=2.0.1,<3.0.0
+seaborn>=0.13.2,<0.14.0
+scikit-learn>=1.3.0,<2.0.0
+matplotlib>=3.8.0,<4.0.0
+plotly>=5.15.0,<6.0.0
+nbformat>=5.8.0,<6.0.0
